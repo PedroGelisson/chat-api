@@ -10,4 +10,16 @@ exports.entrar=async(nick)=>{
             "nick":nick
         }
     }
-}
+};
+
+exports.sairChat = async (nick) => {
+    let user = await usuarioModel.buscarUsuario(nick);
+    if (user) {
+      let resp = await usuarioModel.excluirUsuario(user._id);
+      if (resp.deletedCount) {
+        return {msg:'Ok, saiu do chat', timestamp:timestamp=Date.now()};
+      }
+    }
+    return false;
+  
+  };
